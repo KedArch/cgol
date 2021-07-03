@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import time
-
 import argparse
-import itertools
 
 
 def print_grid(grid: list, y: int, x: int):
@@ -26,31 +24,44 @@ def gen_grid(grid: list, y: int, x: int):
         for j in range(x):
             temp.append(False)
         grid.append(temp)
-    print(grid)
     inp = b""
     while inp not in ("x", "e"):
         if not isinstance(inp, bytes):
-            print(f"\033[{y+2}A", end="")
+            print(f"\033[{y+5}A", end="")
         print_grid(grid, y, x)
+        print("e for exit, x for accepting")
+        print(f"x,y (x in <1,{x}>|y in <1,{y}>) for adding/removing ")
+        inp = input("> ")
+        try:
+            cellx, celly = inp.split(",")
+            cellx = int(cellx)-1
+            celly = int(celly)-1
+            if 0 <= cellx < x and 0 <= celly < y:
+                if grid[celly][cellx]:
+                    grid[celly][cellx] = False
+                else:
+                    grid[celly][cellx] = True
+        except Exception:
+            pass
     if inp == "e":
         sys.exit(0)
+    return grid
 
 
 def next_gen(grid: list, y: int, x: int):
     new = grid.copy()
+    cb = ((-1, -1), (-1, 0), (0, -1), (-1, 1), (1, -1), (0, 1), (1, 0), (1, 1))
+    breakpoint()
     for i in range(y):
         for j in range(x):
             neigh = 0
-            comb = list(itertools.combinations((-1, 0, 1), 2))
-            for k in comb:
-                if 0 < i+k[0] < y and 0 < j+k[1] < x:
-                    if not k[0] and not k[1]:
-                        continue
-                    if grid[i+k[0] < y][i+k[1] < x]:
+            for k in cb:
+                if 0 <= i+k[0] < y and 0 <= j+k[1] < x:
+                    if grid[i+k[0]][j+k[1]]:
                         neigh += 1
             if grid[i][j] and (neigh < 2 or neigh > 3):
                 new[i][j] = False
-            elif not grid[i][j] and (neigh == 3):
+            elif not grid[i][j] and neigh == 3:
                 new[i][j] = True
     return new
 
