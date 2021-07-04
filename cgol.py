@@ -27,7 +27,7 @@ def gen_grid(grid: list, y: int, x: int):
     inp = b""
     while inp not in ("x", "e"):
         if not isinstance(inp, bytes):
-            print(f"\033[{y+5}A", end="")
+            print(f"\033[{y+6}A", end="")
         print_grid(grid, y, x)
         print("e for exit, x for accepting")
         print(f"x,y (x in <1,{x}>|y in <1,{y}>) for adding/removing ")
