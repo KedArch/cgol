@@ -115,8 +115,8 @@ if __name__ == "__main__":
         "-y", default=10, type=int,
         help="grid height, default 10")
     arg.add_argument(
-        "-t", default=1, type=int,
-        help="refresh time, default 1")
+        "-t", default=1, type=float,
+        help="refresh time in seconds, default 1")
     arg.add_argument(
         "-b", default=False, action="store_true",
         help="blocking grid borders, default False")
