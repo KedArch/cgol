@@ -13,8 +13,7 @@ def print_grid(grid: list, y: int, x: int):
                 print("\033[48;2;0;0;0m \033[m", end="")
             else:
                 print("\033[48;2;255;255;255m \033[m", end="")
-        print("|", end="")
-        print()
+        print("|")
     print("+"+"-"*x+"+")
 
 
@@ -27,13 +26,13 @@ def gen_grid(grid: list, y: int, x: int):
     inp = b""
     while inp not in ("x", "e"):
         if not isinstance(inp, bytes):
-            print(f"\033[{y+6}A", end="")
+            print(f"\033[{y+5}A", end="")
         print_grid(grid, y, x)
         print("e for exit, x for accepting")
         print(f"x,y (x in <1,{x}>|y in <1,{y}>) for adding/removing ")
         inp = input("> ")
         print(f"\033[{1}A", end="")
-        print(" "*80)
+        print(" "*max(80, x+2))
         try:
             cellx, celly = inp.split(",")
             cellx = int(cellx)-1
@@ -47,11 +46,10 @@ def gen_grid(grid: list, y: int, x: int):
             pass
     if inp == "e":
         sys.exit(0)
-    print(f"\033[{3}A", end="")
-    print(" "*80)
-    print(" "*80)
-    print(" "*80)
-    print(f"\033[{5+y}A", end="")
+    print(f"\033[{4}A", end="")
+    for i in range(3):
+        print(" "*max(80, x+2))
+    print(f"\033[{y+4}A", end="")
     return grid
 
 
