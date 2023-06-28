@@ -10,10 +10,6 @@ Conway's Game of Life implementation I tried to do some time ago. It is in worki
 - modifiable refresh time
 - (non)blocking grid edges
 
-## Technical limitations
-
-- tested only on Linux with readline
-
 ## Todo
 
 - comments
