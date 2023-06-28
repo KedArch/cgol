@@ -6,9 +6,9 @@ Conway's Game of Life implementation I tried to do some time ago. It is in worki
 
 ## Features
 
--modifiable grid dimensions
--modifiable refresh time
--(non)blocking grid edges
+- modifiable grid dimensions
+- modifiable refresh time
+- (non)blocking grid edges
 
 ## Technical limitations
 
